@@ -1,0 +1,5 @@
+package io.dnloop.model;
+
+public class MaterialValidator {
+
+}

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
+
+<VBox prefHeight="600.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dnloop.controller.Preferences">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Preferencias">
+          <items>
+            <MenuItem fx:id="miSave" mnemonicParsing="false" onAction="#save" text="Guardar">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="G" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="miExit" mnemonicParsing="false" onAction="#quit" text="Salir">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" GridPane.columnSpan="2">
+               <children>
+                  <Separator prefWidth="25.0" />
+                  <Label text="Impresora" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Label text="Consumo (Wh)" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <CustomTextField fx:id="txtConsumption" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Material por defecto" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="cbMaterialType" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <children>
+                  <Separator prefWidth="25.0" />
+                  <Label text="Material" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Label text="Diámetro (mm)" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <CustomTextField fx:id="txtDiameter" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Precio por Kg" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <CustomTextField fx:id="txtMaterialPrice" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="6">
+               <children>
+                  <Separator prefWidth="25.0" />
+                  <Label text="Mantenimiento" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Label text="Vida útil prevista&#10;(años)" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Label text="Horas de trabajo&#10;(anual)" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <CustomTextField fx:id="txtWorkHour" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <CustomTextField fx:id="txtLifeSpan" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </GridPane>
+      <HBox prefHeight="250.0">
+         <children>
+            <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Partes" HBox.hgrow="ALWAYS">
+               <content>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
+                     <content>
+                        <GridPane hgap="10.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Cama Caliente" />
+                              <Label text="Fuente 12V 30A" GridPane.rowIndex="1" />
+                              <Label text="Arduino LCD Display" GridPane.rowIndex="3" />
+                              <Label text="Ventilador 50x50" GridPane.rowIndex="2" />
+                              <Label text="Sensor de Proximidad" GridPane.rowIndex="4" />
+                              <Label text="Extremo Caliente &#10;J-Head" GridPane.rowIndex="5" />
+                              <Label text="Correa" GridPane.columnIndex="2" />
+                              <Label text="Shield CNC" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label text="Cartucho resistencia" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label text="Final de Carrera" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label text="Rodamiento" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label text="Polea tensora" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label text="Driver TMC 213" GridPane.rowIndex="6" />
+                              <Label text="Boquilla 0.4 mm" GridPane.rowIndex="7" />
+                              <Label text="Extrusor" GridPane.rowIndex="8" />
+                              <Label text="Motor Nema 17" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <Label layoutX="10.0" layoutY="287.0" text="Acople" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                              <Label layoutX="10.0" layoutY="317.0" text="Varilla enroscada" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                              <CustomTextField fx:id="txtHotbed" GridPane.columnIndex="1" />
+                              <CustomTextField fx:id="txtPowerSwitch" layoutX="165.0" layoutY="12.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <CustomTextField fx:id="txtFan" layoutX="165.0" layoutY="42.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CustomTextField fx:id="txtDisplay" layoutX="165.0" layoutY="72.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <CustomTextField fx:id="txtProximitySensor" layoutX="165.0" layoutY="102.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <CustomTextField fx:id="txtHotEnd" layoutX="165.0" layoutY="132.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <CustomTextField fx:id="txtDriver" layoutX="165.0" layoutY="162.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <CustomTextField fx:id="txtNozzle" layoutX="475.0" layoutY="192.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <CustomTextField fx:id="txtExtruder" layoutX="165.0" layoutY="222.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <CustomTextField fx:id="txtBelt" layoutX="165.0" layoutY="192.0" GridPane.columnIndex="3" />
+                              <CustomTextField fx:id="txtShield" layoutX="475.0" layoutY="12.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <CustomTextField fx:id="txtResitanceCartridge" layoutX="475.0" layoutY="42.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <CustomTextField fx:id="txtEndStop" layoutX="475.0" layoutY="72.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <CustomTextField fx:id="txtBearing" layoutX="475.0" layoutY="102.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <CustomTextField fx:id="txtPulley" layoutX="475.0" layoutY="132.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <CustomTextField fx:id="txtStepEngine" layoutX="165.0" layoutY="252.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <CustomTextField fx:id="txtCoupler" layoutX="475.0" layoutY="252.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <CustomTextField fx:id="txtThreadedRod" layoutX="165.0" layoutY="312.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </content>
+            </TitledPane>
+         </children>
+      </HBox>
+  </children>
+</VBox>
