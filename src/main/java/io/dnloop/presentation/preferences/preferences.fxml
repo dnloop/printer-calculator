@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<VBox prefHeight="600.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dnloop.controller.Preferences">
+<VBox prefHeight="600.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dnloop.presentation.preferences.PreferencesPresenter">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
