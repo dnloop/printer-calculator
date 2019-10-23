@@ -8,13 +8,13 @@ public class Material {
 
     private String type;
 
-    @Digits(fraction = 2, integer = 9)
+    @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private float diameter;
 
-    @Digits(fraction = 0, integer = 9)
+    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private int filamentLenght;
 
-    @Digits(fraction = 2, integer = 9)
+    @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal materialPrice;
 
     public Material() {

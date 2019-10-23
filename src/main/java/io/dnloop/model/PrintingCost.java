@@ -1,5 +1,10 @@
 package io.dnloop.model;
 
+import java.math.BigDecimal;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+
 public class PrintingCost {
 
     private Energy energy;
@@ -9,6 +14,10 @@ public class PrintingCost {
     private Material material;
 
     private Job job;
+
+    @Min(value = 1, message = "El porcentage es requerido")
+    @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
+    private BigDecimal markup;
 
     public PrintingCost() {
     }
@@ -53,6 +62,14 @@ public class PrintingCost {
 	this.job = job;
     }
 
+    public BigDecimal getMarkup() {
+	return markup;
+    }
+
+    public void setMarkup(BigDecimal markup) {
+	this.markup = markup;
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;
@@ -60,6 +77,7 @@ public class PrintingCost {
 	result = prime * result + ((energy == null) ? 0 : energy.hashCode());
 	result = prime * result + ((job == null) ? 0 : job.hashCode());
 	result = prime * result + ((maintenance == null) ? 0 : maintenance.hashCode());
+	result = prime * result + ((markup == null) ? 0 : markup.hashCode());
 	result = prime * result + ((material == null) ? 0 : material.hashCode());
 	return result;
     }
@@ -88,6 +106,11 @@ public class PrintingCost {
 		return false;
 	} else if (!maintenance.equals(other.maintenance))
 	    return false;
+	if (markup == null) {
+	    if (other.markup != null)
+		return false;
+	} else if (!markup.equals(other.markup))
+	    return false;
 	if (material == null) {
 	    if (other.material != null)
 		return false;
@@ -99,7 +122,7 @@ public class PrintingCost {
     @Override
     public String toString() {
 	return "PrintingCost [energy=" + energy + ", maintenance=" + maintenance + ", material=" + material + ", job="
-		+ job + "]";
+		+ job + ", markup=" + markup + "]";
     }
 
 }

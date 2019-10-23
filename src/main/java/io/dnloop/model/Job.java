@@ -6,10 +6,10 @@ import javax.validation.constraints.Digits;
 
 public class Job {
 
-    @Digits(fraction = 0, integer = 9)
+    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private int workHour;
 
-    @Digits(fraction = 2, integer = 9)
+    @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal hourlyRate;
 
     public Job() {
@@ -27,6 +27,14 @@ public class Job {
 
     public void setHourlyRate(BigDecimal hourlyRate) {
 	this.hourlyRate = hourlyRate;
+    }
+
+    public int getWorkHour() {
+	return workHour;
+    }
+
+    public void setWorkHour(int workHour) {
+	this.workHour = workHour;
     }
 
     @Override

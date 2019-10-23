@@ -6,13 +6,13 @@ import javax.validation.constraints.Digits;
 
 public class Maintenance {
 
-    @Digits(fraction = 2, integer = 9)
+    @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal totalPartsPrice;
 
-    @Digits(fraction = 0, integer = 3)
+    @Digits(fraction = 0, integer = 3, message = "Exceso de Dígitos: mayor a 3")
     private int lifeSpan;
 
-    @Digits(fraction = 0, integer = 9)
+    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private int workHours;
 
     public Maintenance() {
