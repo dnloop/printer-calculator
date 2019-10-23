@@ -1,19 +1,18 @@
-package io.dnloop.controller;
+package io.dnloop.presentation.printerCalculator;
 
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.validation.Valid;
-
 import org.controlsfx.control.textfield.CustomTextField;
+import org.springframework.stereotype.Controller;
 
 import io.dnloop.model.Energy;
 import io.dnloop.model.Job;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
 import io.dnloop.model.PrintingCost;
-import javafx.application.HostServices;
+import io.dnloop.validator.PrintingCostValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,9 +20,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
-public class PrinterCalculator {
+@Controller
+public class PrinterCalculatorPresenter {
 
-    private final HostServices hostService;
+    protected static final String INTFLOAT = "\\d{0,9}([\\.]\\d{0,2})?";
+
+    protected static final String INT = "\\d{0,9}";
 
     @FXML
     private ResourceBundle resources;
@@ -120,7 +122,8 @@ public class PrinterCalculator {
 
     @FXML
     void calculate(ActionEvent event) {
-
+	if (validateFields(readFields()))
+	    System.out.println("valid");
     }
 
     @FXML
@@ -163,9 +166,7 @@ public class PrinterCalculator {
 
     }
 
-    PrinterCalculator(HostServices hostServices) {
-	this.hostService = hostServices;
-    }
+    private PrintingCostValidator costValidator = new PrintingCostValidator();
 
     @FXML
     void initialize() {
@@ -199,36 +200,73 @@ public class PrinterCalculator {
 	assert jobSubtotal != null : "fx:id=\"jobSubtotal\" was not injected: check your FXML file 'printerCalculator.fxml'.";
 	assert markup != null : "fx:id=\"markup\" was not injected: check your FXML file 'printerCalculator.fxml'.";
 
+	totalConsumption.textProperty().addListener((observable, oldValue, newValue) -> {
+	    if (!newValue.matches(INTFLOAT))
+		totalConsumption.setText(oldValue);
+	});
+
+	consumptionPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+	    if (!newValue.matches(INTFLOAT))
+		consumptionPrice.setText(oldValue);
+	});
+
+	printerConsumption.textProperty().addListener((observable, oldValue, newValue) -> {
+	    if (!newValue.matches(INT))
+		printerConsumption.setText(oldValue);
+	});
+
+	workTime.textProperty().addListener((observable, oldValue, newValue) -> {
+	    if (!newValue.matches(INT))
+		workTime.setText(oldValue);
+	});
+
+	powerSubtotal.textProperty().addListener((observable, oldValue, newValue) -> {
+	    if (!newValue.matches(INTFLOAT))
+		powerSubtotal.setText(oldValue);
+	});
+
+	btnCalculate.setOnAction((event) -> {
+	    if (validateFields(readFields()))
+		System.out.println("valid");
+	});
     }
-    
+
     private PrintingCost readFields() {
-	Energy energy = new Energy(
-		Integer.valueOf(totalConsumption.getText()),
-		new BigDecimal(consumptionPrice.getText()),
-		Integer.valueOf(printerConsumption.getText()),
-		Integer.valueOf(workTime.getText())
-	);
-	
-	Material material = new Material(
-		filamentType.getSelectionModel().getSelectedItem(), 
-		Float.valueOf(diameter.getText()),
-		Integer.valueOf(length.getText()),
-		new BigDecimal(filamentPrice.getText())
-	);
-	
-	Maintenance maintenance = new Maintenance(
-		new BigDecimal(partsCost.getText()),
-		Integer.valueOf(expectedLife.getText()),
-		Integer.valueOf(maintenanceWork.getText())
-	);
-	
-	Job job = new Job(Integer.valueOf(
-		jobWT.getText()), 
-		new BigDecimal(jobCost.getText())
-	);
-	
-	@Valid
+	Integer tc = totalConsumption.getText().isEmpty() ? 0 : Integer.valueOf(totalConsumption.getText());
+	BigDecimal cp = consumptionPrice.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(consumptionPrice.getText());
+	Integer pc = printerConsumption.getText().isEmpty() ? 0 : Integer.valueOf(printerConsumption.getText());
+	Integer wt = workTime.getText().isEmpty() ? 0 : Integer.valueOf(workTime.getText());
+
+	Energy energy = new Energy(tc, cp, pc, wt);
+
+	Float dm = diameter.getText().isEmpty() ? 0 : Float.valueOf(diameter.getText());
+	Integer lg = length.getText().isEmpty() ? 0 : Integer.valueOf(length.getText());
+
+	BigDecimal fp = filamentPrice.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(filamentPrice.getText());
+
+	Material material = new Material(filamentType.getSelectionModel().getSelectedItem(), dm, lg, fp);
+
+	BigDecimal ptsc = partsCost.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(partsCost.getText());
+	Integer el = expectedLife.getText().isEmpty() ? 0 : Integer.valueOf(expectedLife.getText());
+	Integer mw = maintenanceWork.getText().isEmpty() ? 0 : Integer.valueOf(maintenanceWork.getText());
+
+	Maintenance maintenance = new Maintenance(ptsc, el, mw);
+
+	Integer jwt = jobWT.getText().isEmpty() ? 0 : Integer.valueOf(jobWT.getText());
+	BigDecimal jc = jobCost.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(jobCost.getText());
+
+	Job job = new Job(jwt, jc);
+
 	PrintingCost printingCost = new PrintingCost(energy, maintenance, material, job);
-	return printingCost ;
+
+	return printingCost;
     }
+
+    private boolean validateFields(PrintingCost fields) {
+	costValidator.setEntity(fields);
+	return costValidator.validate(totalConsumption, consumptionPrice, printerConsumption, workTime, diameter,
+		length, filamentPrice, partsCost, expectedLife, maintenanceWork, jobWT, jobCost, markup);
+    }
+
 }
