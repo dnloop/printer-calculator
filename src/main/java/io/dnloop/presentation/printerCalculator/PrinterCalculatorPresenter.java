@@ -225,10 +225,10 @@ public class PrinterCalculatorPresenter {
 		powerSubtotal.setText(oldValue);
 	});
 
-	btnCalculate.setOnAction((event) -> {
-	    if (validateFields(readFields()))
-		System.out.println("valid");
-	});
+//	btnCalculate.setOnAction((event) -> {
+//	    if (validateFields(readFields()))
+//		System.out.println("valid");
+//	}); WTF!
     }
 
     private PrintingCost readFields() {

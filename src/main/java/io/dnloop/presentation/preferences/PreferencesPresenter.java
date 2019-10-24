@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.textfield.CustomTextField;
 
 import io.dnloop.model.Parts;
+import io.dnloop.validator.PartsValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -105,8 +106,15 @@ public class PreferencesPresenter {
 
     @FXML
     void save(ActionEvent event) {
-
+	if (validateFields(readFields()))
+	    System.out.println("valid"); // temporal
     }
+
+    protected static final String INTFLOAT = "\\d{0,9}([\\.]\\d{0,2})?";
+
+    protected static final String INT = "\\d{0,9}";
+
+    private PartsValidator partsValidator = new PartsValidator();
 
     @FXML
     void initialize() {
@@ -167,5 +175,12 @@ public class PreferencesPresenter {
 
 	return new Parts(hotBed, powerSwitch, fan, display, proximitySensor, hotEnd, driver, nozzle, extruder, belt,
 		shield, resistanceCartridge, endStop, bearing, pulley, stepEngine, coupler, threadedRod);
+    }
+
+    private boolean validateFields(Parts parts) {
+	partsValidator.setParts(parts);
+	return partsValidator.validate(txtHotbed, txtPowerSwitch, txtFan, txtDisplay, txtProximitySensor, txtHotEnd,
+		txtDriver, txtNozzle, txtExtruder, txtBelt, txtShield, txtResistanceCartridge, txtEndStop, txtBearing,
+		txtPulley, txtStepEngine, txtCoupler, txtThreadedRod);
     }
 }
