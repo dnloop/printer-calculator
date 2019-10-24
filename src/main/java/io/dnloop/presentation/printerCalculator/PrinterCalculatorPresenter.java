@@ -258,9 +258,7 @@ public class PrinterCalculatorPresenter {
 
 	Job job = new Job(jwt, jc);
 
-	PrintingCost printingCost = new PrintingCost(energy, maintenance, material, job);
-
-	return printingCost;
+	return new PrintingCost(energy, maintenance, material, job);
     }
 
     private boolean validateFields(PrintingCost fields) {
