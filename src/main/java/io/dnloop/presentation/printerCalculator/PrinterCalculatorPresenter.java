@@ -170,35 +170,35 @@ public class PrinterCalculatorPresenter {
 
     @FXML
     void initialize() {
-	assert miNew != null : "fx:id=\"miNew\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert miOpen != null : "fx:id=\"miOpen\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert miOpenRecent != null : "fx:id=\"miOpenRecent\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert miSave != null : "fx:id=\"miSave\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert miSaveAs != null : "fx:id=\"miSaveAs\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert miPreferences != null : "fx:id=\"miPreferences\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert miQuit != null : "fx:id=\"miQuit\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert total != null : "fx:id=\"total\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert btnCalculate != null : "fx:id=\"btnCalculate\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert btnClear != null : "fx:id=\"btnClear\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert btnReload != null : "fx:id=\"btnReload\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert totalConsumption != null : "fx:id=\"totalConsumption\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert consumptionPrice != null : "fx:id=\"consumptionPrice\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert printerConsumption != null : "fx:id=\"printerConsumption\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert workTime != null : "fx:id=\"workTime\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert powerSubtotal != null : "fx:id=\"powerSubtotal\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert partsCost != null : "fx:id=\"partsCost\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert expectedLife != null : "fx:id=\"expectedLife\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert maintenanceWork != null : "fx:id=\"maintenanceWork\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert maintenanceSubtotal != null : "fx:id=\"maintenanceSubtotal\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert filamentType != null : "fx:id=\"filamentType\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert diameter != null : "fx:id=\"diameter\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert length != null : "fx:id=\"length\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert filamentPrice != null : "fx:id=\"filamentPrice\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert materialSubtotal != null : "fx:id=\"materialSubtotal\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert jobWT != null : "fx:id=\"jobWT\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert jobCost != null : "fx:id=\"jobCost\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert jobSubtotal != null : "fx:id=\"jobSubtotal\" was not injected: check your FXML file 'printerCalculator.fxml'.";
-	assert markup != null : "fx:id=\"markup\" was not injected: check your FXML file 'printerCalculator.fxml'.";
+	assert miNew != null : "fx:id=\"miNew\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert miOpen != null : "fx:id=\"miOpen\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert miOpenRecent != null : "fx:id=\"miOpenRecent\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert miSave != null : "fx:id=\"miSave\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert miSaveAs != null : "fx:id=\"miSaveAs\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert miPreferences != null : "fx:id=\"miPreferences\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert miQuit != null : "fx:id=\"miQuit\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert total != null : "fx:id=\"total\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert btnCalculate != null : "fx:id=\"btnCalculate\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert btnClear != null : "fx:id=\"btnClear\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert btnReload != null : "fx:id=\"btnReload\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert totalConsumption != null : "fx:id=\"totalConsumption\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert consumptionPrice != null : "fx:id=\"consumptionPrice\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert printerConsumption != null : "fx:id=\"printerConsumption\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert workTime != null : "fx:id=\"workTime\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert powerSubtotal != null : "fx:id=\"powerSubtotal\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert partsCost != null : "fx:id=\"partsCost\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert expectedLife != null : "fx:id=\"expectedLife\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert maintenanceWork != null : "fx:id=\"maintenanceWork\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert maintenanceSubtotal != null : "fx:id=\"maintenanceSubtotal\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert filamentType != null : "fx:id=\"filamentType\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert diameter != null : "fx:id=\"diameter\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert length != null : "fx:id=\"length\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert filamentPrice != null : "fx:id=\"filamentPrice\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert materialSubtotal != null : "fx:id=\"materialSubtotal\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert jobWT != null : "fx:id=\"jobWT\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert jobCost != null : "fx:id=\"jobCost\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert jobSubtotal != null : "fx:id=\"jobSubtotal\" was not injected: check your FXML file 'printercalculator.fxml'.";
+	assert markup != null : "fx:id=\"markup\" was not injected: check your FXML file 'printercalculator.fxml'.";
 
 	totalConsumption.textProperty().addListener((observable, oldValue, newValue) -> {
 	    if (!newValue.matches(INTFLOAT))
