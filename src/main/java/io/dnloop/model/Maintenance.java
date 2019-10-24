@@ -15,6 +15,8 @@ public class Maintenance {
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private int workHours;
 
+    private Parts parts;
+
     public Maintenance() {
     }
 
@@ -49,11 +51,20 @@ public class Maintenance {
 	this.workHours = workHours;
     }
 
+    public Parts getParts() {
+	return parts;
+    }
+
+    public void setParts(Parts parts) {
+	this.parts = parts;
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + lifeSpan;
+	result = prime * result + ((parts == null) ? 0 : parts.hashCode());
 	result = prime * result + ((totalPartsPrice == null) ? 0 : totalPartsPrice.hashCode());
 	result = prime * result + workHours;
 	return result;
@@ -70,6 +81,11 @@ public class Maintenance {
 	Maintenance other = (Maintenance) obj;
 	if (lifeSpan != other.lifeSpan)
 	    return false;
+	if (parts == null) {
+	    if (other.parts != null)
+		return false;
+	} else if (!parts.equals(other.parts))
+	    return false;
 	if (totalPartsPrice == null) {
 	    if (other.totalPartsPrice != null)
 		return false;
@@ -83,7 +99,7 @@ public class Maintenance {
     @Override
     public String toString() {
 	return "Maintenance [totalPartsPrice=" + totalPartsPrice + ", lifeSpan=" + lifeSpan + ", workHours=" + workHours
-		+ "]";
+		+ ", parts=" + parts + "]";
     }
 
 }
