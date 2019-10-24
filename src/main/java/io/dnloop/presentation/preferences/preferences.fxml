@@ -182,7 +182,7 @@
                               <CustomTextField fx:id="txtExtruder" layoutX="165.0" layoutY="222.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <CustomTextField fx:id="txtBelt" layoutX="165.0" layoutY="192.0" GridPane.columnIndex="3" />
                               <CustomTextField fx:id="txtShield" layoutX="475.0" layoutY="12.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <CustomTextField fx:id="txtResitanceCartridge" layoutX="475.0" layoutY="42.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <CustomTextField fx:id="txtResistanceCartridge" layoutX="475.0" layoutY="42.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                               <CustomTextField fx:id="txtEndStop" layoutX="475.0" layoutY="72.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                               <CustomTextField fx:id="txtBearing" layoutX="475.0" layoutY="102.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                               <CustomTextField fx:id="txtPulley" layoutX="475.0" layoutY="132.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
