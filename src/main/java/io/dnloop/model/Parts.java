@@ -1,6 +1,7 @@
 package io.dnloop.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import javax.validation.constraints.Digits;
 
@@ -58,7 +59,7 @@ public class Parts {
     private BigDecimal coupler;
 
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
-    private BigDecimal threadeRod;
+    private BigDecimal threadedRod;
 
     public Parts() {
     }
@@ -85,7 +86,7 @@ public class Parts {
 	this.pulley = pulley;
 	this.stepEngine = stepEngine;
 	this.coupler = coupler;
-	this.threadeRod = threadeRod;
+	this.threadedRod = threadeRod;
     }
 
     public BigDecimal getHotBed() {
@@ -225,11 +226,11 @@ public class Parts {
     }
 
     public BigDecimal getThreadeRod() {
-	return threadeRod;
+	return threadedRod;
     }
 
     public void setThreadeRod(BigDecimal threadeRod) {
-	this.threadeRod = threadeRod;
+	this.threadedRod = threadeRod;
     }
 
     @Override
@@ -253,7 +254,7 @@ public class Parts {
 	result = prime * result + ((resistanceCartridge == null) ? 0 : resistanceCartridge.hashCode());
 	result = prime * result + ((shield == null) ? 0 : shield.hashCode());
 	result = prime * result + ((stepEngine == null) ? 0 : stepEngine.hashCode());
-	result = prime * result + ((threadeRod == null) ? 0 : threadeRod.hashCode());
+	result = prime * result + ((threadedRod == null) ? 0 : threadedRod.hashCode());
 	return result;
     }
 
@@ -351,10 +352,10 @@ public class Parts {
 		return false;
 	} else if (!stepEngine.equals(other.stepEngine))
 	    return false;
-	if (threadeRod == null) {
-	    if (other.threadeRod != null)
+	if (threadedRod == null) {
+	    if (other.threadedRod != null)
 		return false;
-	} else if (!threadeRod.equals(other.threadeRod))
+	} else if (!threadedRod.equals(other.threadedRod))
 	    return false;
 	return true;
     }
@@ -365,7 +366,96 @@ public class Parts {
 		+ ", proximitySensor=" + proximitySensor + ", hotEnd=" + hotEnd + ", driver=" + driver + ", nozzle="
 		+ nozzle + ", extruder=" + extruder + ", belt=" + belt + ", shield=" + shield + ", resistanceCartridge="
 		+ resistanceCartridge + ", endStop=" + endStop + ", bearing=" + bearing + ", pulley=" + pulley
-		+ ", stepEngine=" + stepEngine + ", coupler=" + coupler + ", threadeRod=" + threadeRod + "]";
+		+ ", stepEngine=" + stepEngine + ", coupler=" + coupler + ", threadeRod=" + threadedRod + "]";
+    }
+
+    private void checkNull() {
+	if (hotBed == null)
+	    hotBed = new BigDecimal(0);
+
+	if (powerSwitch == null)
+	    powerSwitch = new BigDecimal(0);
+
+	if (fan == null)
+	    fan = new BigDecimal(0);
+
+	if (display == null)
+	    display = new BigDecimal(0);
+
+	if (proximitySensor == null)
+	    proximitySensor = new BigDecimal(0);
+
+	if (hotEnd == null)
+	    hotEnd = new BigDecimal(0);
+
+	if (driver == null)
+	    driver = new BigDecimal(0);
+
+	if (nozzle == null)
+	    nozzle = new BigDecimal(0);
+
+	if (extruder == null)
+	    extruder = new BigDecimal(0);
+
+	if (belt == null)
+	    belt = new BigDecimal(0);
+
+	if (shield == null)
+	    shield = new BigDecimal(0);
+
+	if (resistanceCartridge == null)
+	    resistanceCartridge = new BigDecimal(0);
+
+	if (endStop == null)
+	    endStop = new BigDecimal(0);
+
+	if (bearing == null)
+	    bearing = new BigDecimal(0);
+
+	if (pulley == null)
+	    pulley = new BigDecimal(0);
+
+	if (stepEngine == null)
+	    stepEngine = new BigDecimal(0);
+
+	if (coupler == null)
+	    coupler = new BigDecimal(0);
+
+	if (threadedRod == null)
+	    threadedRod = new BigDecimal(0);
+    }
+
+    private ArrayList<BigDecimal> partsList() {
+	checkNull();
+	ArrayList<BigDecimal> list = new ArrayList<>();
+	list.add(hotBed);
+	list.add(powerSwitch);
+	list.add(fan);
+	list.add(display);
+	list.add(proximitySensor);
+	list.add(hotEnd);
+	list.add(driver);
+	list.add(nozzle);
+	list.add(extruder);
+	list.add(belt);
+	list.add(shield);
+	list.add(resistanceCartridge);
+	list.add(endStop);
+	list.add(bearing);
+	list.add(pulley);
+	list.add(stepEngine);
+	list.add(coupler);
+	list.add(threadedRod);
+
+	return list;
+    }
+
+    public BigDecimal totalParts() {
+	BigDecimal total = new BigDecimal(0);
+	for (BigDecimal part : partsList())
+	    total.add(part);
+
+	return total;
     }
 
 }
