@@ -67,7 +67,7 @@ public class Parts {
     public Parts(BigDecimal hotBed, BigDecimal powerSwitch, BigDecimal fan, BigDecimal display,
 	    BigDecimal proximitySensor, BigDecimal hotEnd, BigDecimal driver, BigDecimal nozzle, BigDecimal extruder,
 	    BigDecimal belt, BigDecimal shield, BigDecimal resistanceCartridge, BigDecimal endStop, BigDecimal bearing,
-	    BigDecimal pulley, BigDecimal stepEngine, BigDecimal coupler, BigDecimal threadeRod) {
+	    BigDecimal pulley, BigDecimal stepEngine, BigDecimal coupler, BigDecimal threadedRod) {
 	super();
 	this.hotBed = hotBed;
 	this.powerSwitch = powerSwitch;
@@ -86,7 +86,7 @@ public class Parts {
 	this.pulley = pulley;
 	this.stepEngine = stepEngine;
 	this.coupler = coupler;
-	this.threadedRod = threadeRod;
+	this.threadedRod = threadedRod;
     }
 
     public BigDecimal getHotBed() {
@@ -229,8 +229,8 @@ public class Parts {
 	return threadedRod;
     }
 
-    public void setThreadeRod(BigDecimal threadeRod) {
-	this.threadedRod = threadeRod;
+    public void setThreadeRod(BigDecimal threadedRod) {
+	this.threadedRod = threadedRod;
     }
 
     @Override
@@ -366,7 +366,7 @@ public class Parts {
 		+ ", proximitySensor=" + proximitySensor + ", hotEnd=" + hotEnd + ", driver=" + driver + ", nozzle="
 		+ nozzle + ", extruder=" + extruder + ", belt=" + belt + ", shield=" + shield + ", resistanceCartridge="
 		+ resistanceCartridge + ", endStop=" + endStop + ", bearing=" + bearing + ", pulley=" + pulley
-		+ ", stepEngine=" + stepEngine + ", coupler=" + coupler + ", threadeRod=" + threadedRod + "]";
+		+ ", stepEngine=" + stepEngine + ", coupler=" + coupler + ", threadedRod=" + threadedRod + "]";
     }
 
     private void checkNull() {
