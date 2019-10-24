@@ -1,10 +1,12 @@
 package io.dnloop.presentation.preferences;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import io.dnloop.model.Parts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -76,7 +78,7 @@ public class PreferencesPresenter {
     private CustomTextField txtShield;
 
     @FXML
-    private CustomTextField txtResitanceCartridge;
+    private CustomTextField txtResistanceCartridge;
 
     @FXML
     private CustomTextField txtEndStop;
@@ -127,7 +129,7 @@ public class PreferencesPresenter {
 	assert txtExtruder != null : "fx:id=\"txtExtruder\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtBelt != null : "fx:id=\"txtBelt\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtShield != null : "fx:id=\"txtShield\" was not injected: check your FXML file 'preferences.fxml'.";
-	assert txtResitanceCartridge != null : "fx:id=\"txtResitanceCartridge\" was not injected: check your FXML file 'preferences.fxml'.";
+	assert txtResistanceCartridge != null : "fx:id=\"txtResitanceCartridge\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtEndStop != null : "fx:id=\"txtEndStop\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtBearing != null : "fx:id=\"txtBearing\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtPulley != null : "fx:id=\"txtPulley\" was not injected: check your FXML file 'preferences.fxml'.";
@@ -135,5 +137,35 @@ public class PreferencesPresenter {
 	assert txtCoupler != null : "fx:id=\"txtCoupler\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtThreadedRod != null : "fx:id=\"txtThreadedRod\" was not injected: check your FXML file 'preferences.fxml'.";
 
+    }
+
+    private Parts readFields() {
+	BigDecimal hotBed = txtHotbed.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtHotbed.getText());
+	BigDecimal powerSwitch = txtPowerSwitch.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtPowerSwitch.getText());
+	BigDecimal fan = txtFan.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtFan.getText());
+	BigDecimal display = txtDisplay.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtDisplay.getText());
+	BigDecimal proximitySensor = txtProximitySensor.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtProximitySensor.getText());
+	BigDecimal hotEnd = txtHotEnd.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtHotbed.getText());
+	BigDecimal driver = txtDriver.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtDriver.getText());
+	BigDecimal nozzle = txtNozzle.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtNozzle.getText());
+	BigDecimal extruder = txtExtruder.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtExtruder.getText());
+	BigDecimal belt = txtBelt.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtBelt.getText());
+	BigDecimal shield = txtShield.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtShield.getText());
+	BigDecimal resistanceCartridge = txtResistanceCartridge.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtResistanceCartridge.getText());
+	BigDecimal endStop = txtEndStop.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtEndStop.getText());
+	BigDecimal bearing = txtBearing.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtBearing.getText());
+	BigDecimal pulley = txtPulley.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtPulley.getText());
+	BigDecimal stepEngine = txtStepEngine.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtStepEngine.getText());
+	BigDecimal coupler = txtCoupler.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtCoupler.getText());
+	BigDecimal threadedRod = txtThreadedRod.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtThreadedRod.getText());
+
+	return new Parts(hotBed, powerSwitch, fan, display, proximitySensor, hotEnd, driver, nozzle, extruder, belt,
+		shield, resistanceCartridge, endStop, bearing, pulley, stepEngine, coupler, threadedRod);
     }
 }
