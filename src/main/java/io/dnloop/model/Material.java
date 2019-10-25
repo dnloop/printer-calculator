@@ -28,6 +28,12 @@ public class Material {
 	this.materialPrice = materialPrice;
     }
 
+    public Material(Float diameter, String type, BigDecimal materialPrice) {
+	this.type = type;
+	this.diameter = diameter;
+	this.materialPrice = materialPrice;
+    }
+
     public String getType() {
 	return type;
     }

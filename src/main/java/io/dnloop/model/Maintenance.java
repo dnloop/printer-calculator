@@ -27,6 +27,11 @@ public class Maintenance {
 	this.workHours = workHours;
     }
 
+    public Maintenance(Integer lifeSpan, Integer workHours) {
+	this.lifeSpan = lifeSpan;
+	this.workHours = workHours;
+    }
+
     public BigDecimal getTotalPartsPrice() {
 	return totalPartsPrice;
     }

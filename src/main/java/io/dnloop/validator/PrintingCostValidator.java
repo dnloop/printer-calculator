@@ -6,7 +6,7 @@ import io.dnloop.model.PrintingCost;
 
 public class PrintingCostValidator extends EntityValidator {
 
-    private PrintingCost entity;
+    private PrintingCost printingCost;
 
     private EnergyValidator energyValidator;
 
@@ -16,16 +16,16 @@ public class PrintingCostValidator extends EntityValidator {
 
     private MaintenanceValidator maintenanceValidator;
 
-    public PrintingCostValidator(PrintingCost entity) {
-	this.entity = entity;
+    public PrintingCostValidator(PrintingCost printingCost) {
+	this.printingCost = printingCost;
     }
 
     public PrintingCostValidator() {
     }
 
     public boolean markup(CustomTextField textField) {
-	if (!validateProperty(entity, "markup").isEmpty()) {
-	    registerValidation(textField, validateProperty(entity, "markup").iterator().next().getMessage());
+	if (!validateProperty(printingCost, "markup").isEmpty()) {
+	    registerValidation(textField, validateProperty(printingCost, "markup").iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
@@ -39,64 +39,35 @@ public class PrintingCostValidator extends EntityValidator {
 	boolean status = true;
 
 	/* Validators */
-	energyValidator = new EnergyValidator(entity.getEnergy());
-	materialValidator = new MaterialValidator(entity.getMaterial());
-	maintenanceValidator = new MaintenanceValidator(entity.getMaintenance());
-	jobValidator = new JobValidator(entity.getJob());
+	energyValidator = new EnergyValidator(printingCost.getEnergy());
+	materialValidator = new MaterialValidator(printingCost.getMaterial());
+	maintenanceValidator = new MaintenanceValidator(printingCost.getMaintenance());
+	jobValidator = new JobValidator(printingCost.getJob());
 
-	/* BEG Energy Validations */
-	if (energyValidator.totalConsumption(totalConsumption))
-	    status = false;
-
-	if (energyValidator.totalPrice(consumptionPrice))
+	if (energyValidator.validate(totalConsumption, consumptionPrice, printerConsumption, workTime))
 	    status = false;
 
-	if (energyValidator.printerConsumption(printerConsumption))
+	if (materialValidator.validate(diameter, length, filamentPrice))
 	    status = false;
 
-	if (energyValidator.totalConsumption(workTime))
-	    status = false;
-	/* END Energy Validations */
-	/* BEG Material Validations */
-	if (materialValidator.diameter(diameter))
+	if (maintenanceValidator.validate(partsCost, expectedLife, maintenanceWork))
 	    status = false;
 
-	if (materialValidator.filamentLenght(length))
+	if (jobValidator.validate(jobWT, jobCost))
 	    status = false;
 
-	if (materialValidator.materialPrice(filamentPrice))
-	    status = false;
-	/* END Material Validations */
-	/* BEG Maintenance Validations */
-	if (maintenanceValidator.totalPartsPrice(partsCost))
-	    status = false;
-
-	if (maintenanceValidator.lifeSpan(expectedLife))
-	    status = false;
-
-	if (maintenanceValidator.workHours(maintenanceWork))
-	    status = false;
-	/* END Maintenance Validations */
-	/* BEG Job Validations */
-	if (jobValidator.workHour(jobWT))
-	    status = false;
-
-	if (jobValidator.hourlyRate(jobCost))
-	    status = false;
-	/* END Job Validations */
-	/* BEG Markup Validation */
 	if (markup(markup))
 	    status = false;
-	/* END Markup Validation */
+
 	return status;
     }
 
-    public PrintingCost getEntity() {
-	return entity;
+    public PrintingCost getPrintingCost() {
+	return printingCost;
     }
 
-    public void setEntity(PrintingCost entity) {
-	this.entity = entity;
+    public void setPrintingCost(PrintingCost printingCost) {
+	this.printingCost = printingCost;
     }
 
     public EnergyValidator getEnergyValidator() {

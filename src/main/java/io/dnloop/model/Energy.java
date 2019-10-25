@@ -31,6 +31,10 @@ public class Energy {
 	this.workHours = workHours;
     }
 
+    public Energy(Integer totalConsumption) {
+	this.totalConsumption = totalConsumption;
+    }
+
     public Integer getTotalConsumption() {
 	return totalConsumption;
     }
