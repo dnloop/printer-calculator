@@ -6,8 +6,12 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import io.dnloop.model.Energy;
+import io.dnloop.model.Maintenance;
+import io.dnloop.model.Material;
 import io.dnloop.model.Parts;
-import io.dnloop.validator.PartsValidator;
+import io.dnloop.model.Settings;
+import io.dnloop.validator.SettingsValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -31,7 +35,7 @@ public class PreferencesPresenter {
     private CustomTextField txtConsumption;
 
     @FXML
-    private ChoiceBox<?> cbMaterialType;
+    private ChoiceBox<String> cbMaterialType;
 
     @FXML
     private CustomTextField txtDiameter;
@@ -114,7 +118,7 @@ public class PreferencesPresenter {
 
     protected static final String INT = "\\d{0,9}";
 
-    private PartsValidator partsValidator = new PartsValidator();
+    private SettingsValidator settingsValidator = new SettingsValidator();
 
     @FXML
     void initialize() {
@@ -147,7 +151,7 @@ public class PreferencesPresenter {
 
     }
 
-    private Parts readFields() {
+    private Settings readFields() {
 	BigDecimal hotBed = txtHotbed.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtHotbed.getText());
 	BigDecimal powerSwitch = txtPowerSwitch.getText().isEmpty() ? new BigDecimal(0)
 		: new BigDecimal(txtPowerSwitch.getText());
@@ -173,14 +177,34 @@ public class PreferencesPresenter {
 	BigDecimal threadedRod = txtThreadedRod.getText().isEmpty() ? new BigDecimal(0)
 		: new BigDecimal(txtThreadedRod.getText());
 
-	return new Parts(hotBed, powerSwitch, fan, display, proximitySensor, hotEnd, driver, nozzle, extruder, belt,
-		shield, resistanceCartridge, endStop, bearing, pulley, stepEngine, coupler, threadedRod);
+	Integer totalConsumption = txtConsumption.getText().isEmpty() ? 0 : Integer.valueOf(txtConsumption.getText());
+
+	Float diameter = txtDiameter.getText().isEmpty() ? 0 : Float.valueOf(txtDiameter.getText());
+
+	BigDecimal filamentPrice = txtMaterialPrice.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtMaterialPrice.getText());
+
+	Integer lifeSpan = txtLifeSpan.getText().isEmpty() ? 0 : Integer.valueOf(txtLifeSpan.getText());
+	Integer workHours = txtWorkHour.getText().isEmpty() ? 0 : Integer.valueOf(txtWorkHour.getText());
+
+	Parts parts = new Parts(hotBed, powerSwitch, fan, display, proximitySensor, hotEnd, driver, nozzle, extruder,
+		belt, shield, resistanceCartridge, endStop, bearing, pulley, stepEngine, coupler, threadedRod);
+
+	Energy energy = new Energy(totalConsumption);
+
+	Material material = new Material(diameter, cbMaterialType.getSelectionModel().getSelectedItem(), filamentPrice);
+
+	Maintenance maintenance = new Maintenance(lifeSpan, workHours);
+
+	return new Settings(parts, maintenance, energy, material);
     }
 
-    private boolean validateFields(Parts parts) {
-	partsValidator.setParts(parts);
-	return partsValidator.validate(txtHotbed, txtPowerSwitch, txtFan, txtDisplay, txtProximitySensor, txtHotEnd,
+    private boolean validateFields(Settings settings) {
+	settingsValidator.setSettings(settings);
+
+	return settingsValidator.validate(txtHotbed, txtPowerSwitch, txtFan, txtDisplay, txtProximitySensor, txtHotEnd,
 		txtDriver, txtNozzle, txtExtruder, txtBelt, txtShield, txtResistanceCartridge, txtEndStop, txtBearing,
-		txtPulley, txtStepEngine, txtCoupler, txtThreadedRod);
+		txtPulley, txtStepEngine, txtCoupler, txtThreadedRod, txtConsumption, txtDiameter, txtMaterialPrice,
+		txtLifeSpan, txtWorkHour);
     }
 }
