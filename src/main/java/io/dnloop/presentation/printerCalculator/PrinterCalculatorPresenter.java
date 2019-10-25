@@ -12,20 +12,21 @@ import io.dnloop.model.Job;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
 import io.dnloop.model.PrintingCost;
+import io.dnloop.presentation.preferences.PreferencesPresenter;
+import io.dnloop.presentation.preferences.PreferencesView;
 import io.dnloop.validator.PrintingCostValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 @Controller
 public class PrinterCalculatorPresenter {
-
-    protected static final String INTFLOAT = "\\d{0,9}([\\.]\\d{0,2})?";
-
-    protected static final String INT = "\\d{0,9}";
 
     @FXML
     private ResourceBundle resources;
@@ -143,7 +144,12 @@ public class PrinterCalculatorPresenter {
 
     @FXML
     void preferences(ActionEvent event) {
-
+	PreferencesView preferencesView = new PreferencesView();
+	preferencesPresenter = (PreferencesPresenter) preferencesView.getPresenter();
+	Stage stage = new Stage();
+	stage.setScene(new Scene(preferencesView.getView()));
+	stage.initModality(Modality.APPLICATION_MODAL);
+	stage.showAndWait();
     }
 
     @FXML
@@ -165,6 +171,12 @@ public class PrinterCalculatorPresenter {
     void saveAs(ActionEvent event) {
 
     }
+
+    PreferencesPresenter preferencesPresenter;
+
+    protected static final String INTFLOAT = "\\d{0,9}([\\.]\\d{0,2})?";
+
+    protected static final String INT = "\\d{0,9}";
 
     private PrintingCostValidator costValidator = new PrintingCostValidator();
 
@@ -225,10 +237,6 @@ public class PrinterCalculatorPresenter {
 		powerSubtotal.setText(oldValue);
 	});
 
-//	btnCalculate.setOnAction((event) -> {
-//	    if (validateFields(readFields()))
-//		System.out.println("valid");
-//	}); WTF!
     }
 
     private PrintingCost readFields() {
@@ -262,7 +270,7 @@ public class PrinterCalculatorPresenter {
     }
 
     private boolean validateFields(PrintingCost fields) {
-	costValidator.setEntity(fields);
+	costValidator.setPrintingCost(fields);
 	return costValidator.validate(totalConsumption, consumptionPrice, printerConsumption, workTime, diameter,
 		length, filamentPrice, partsCost, expectedLife, maintenanceWork, jobWT, jobCost, markup);
     }
