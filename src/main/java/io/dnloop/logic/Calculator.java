@@ -5,8 +5,8 @@ import java.math.MathContext;
 
 import io.dnloop.model.Energy;
 import io.dnloop.model.Job;
-import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
+import io.dnloop.model.Printer;
 
 public class Calculator {
 
@@ -25,15 +25,46 @@ public class Calculator {
 
     public static BigDecimal jobTotal(Job job) {
 	BigDecimal hourlyRate = job.getHourlyRate();
-	BigDecimal workHour = new BigDecimal(job.getWorkHour());
+	BigDecimal workHour = new BigDecimal(job.getWorkHours());
 	return hourlyRate.multiply(workHour, mc);
     }
 
-    public static BigDecimal maintenanceTotal(Maintenance maintenance) {
-	return null;
+    public static BigDecimal maintenanceTotal(Printer printer) {
+	BigDecimal lifeSpan = new BigDecimal(printer.getMaintenance().getLifeSpan());
+
+	BigDecimal workHours = lifeSpan.multiply(new BigDecimal(printer.getMaintenance().getWorkHours())); // daily ->
+													   // yearly
+
+	BigDecimal depreciationExpense = printer.getPrinterPrice().divide(lifeSpan.multiply(workHours));
+
+	BigDecimal powerConsumption = new BigDecimal(printer.getEnergy().getYearlyConsumption() * 24); // Watt
+
+	BigDecimal maintenance = printer.getParts().totalParts().divide(workHours); // maintenance cost
+
+	BigDecimal total = maintenance.add(depreciationExpense).add(powerConsumption); // machine overhead per hour
+
+	return total;
     }
 
     public static BigDecimal materialTotal(Material material) {
-	return null;
+
+	BigDecimal diameter = new BigDecimal(material.getDiameter()); // mm
+
+	BigDecimal radius = diameter.divide(new BigDecimal(2));
+
+	BigDecimal pi = new BigDecimal(Math.PI);
+
+	BigDecimal length = new BigDecimal(material.getFilamentLength()); // mm
+
+	BigDecimal volume = radius.pow(2).multiply(length).multiply(pi);
+
+	BigDecimal weight = new BigDecimal(1000); // kg
+
+	BigDecimal density = weight.divide(volume);
+
+	BigDecimal materialCost = density.multiply(pi).multiply(
+		diameter.divide(new BigDecimal(2)).pow(2).multiply(length).multiply(material.getMaterialPrice()));
+
+	return materialCost;
     }
 }
