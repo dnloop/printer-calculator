@@ -45,6 +45,7 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -71,13 +72,13 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </CustomTextField>
-            <Label text="Material por defecto" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <ChoiceBox fx:id="cbMaterialType" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label text="Material por defecto" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="cbMaterialType" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </ChoiceBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                <children>
                   <Separator prefWidth="25.0" />
                   <Label text="Material" HBox.hgrow="ALWAYS">
@@ -88,19 +89,19 @@
                   <Separator HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Label text="Diámetro (mm)" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <CustomTextField fx:id="txtDiameter" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label text="Diámetro (mm)" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <CustomTextField fx:id="txtDiameter" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </CustomTextField>
-            <Label text="Precio por Kg" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <CustomTextField fx:id="txtMaterialPrice" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label text="Precio por Kg" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <CustomTextField fx:id="txtMaterialPrice" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </CustomTextField>
-            <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="6">
+            <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="7">
                <children>
                   <Separator prefWidth="25.0" />
                   <Label text="Mantenimiento" HBox.hgrow="ALWAYS">
@@ -111,14 +112,20 @@
                   <Separator HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Label text="Vida útil prevista&#10;(años)" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-            <Label text="Horas de trabajo&#10;(anual)" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <CustomTextField fx:id="txtWorkHour" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <Label text="Vida útil prevista&#10;(años)" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Label text="Horas de trabajo&#10;(día)" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <CustomTextField fx:id="txtWorkHour" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </CustomTextField>
-            <CustomTextField fx:id="txtLifeSpan" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <CustomTextField fx:id="txtLifeSpan" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </CustomTextField>
+            <Label text="Precio" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <CustomTextField fx:id="txtPrinter" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
@@ -128,9 +135,9 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
       </GridPane>
-      <HBox prefHeight="250.0" VBox.vgrow="ALWAYS">
+      <HBox prefHeight="152.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
          <children>
-            <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Partes" HBox.hgrow="ALWAYS">
+            <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="640.0" text="Partes" HBox.hgrow="ALWAYS">
                <content>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
                      <content>
