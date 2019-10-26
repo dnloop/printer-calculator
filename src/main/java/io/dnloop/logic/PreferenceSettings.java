@@ -1,12 +1,12 @@
 package io.dnloop.logic;
 
+import java.io.IOException;
 import java.util.prefs.Preferences;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.dnloop.model.Maintenance;
-import io.dnloop.model.Material;
+import io.dnloop.model.Printer;
 
 public class PreferenceSettings {
 
@@ -22,55 +22,25 @@ public class PreferenceSettings {
 	preferences = Preferences.userNodeForPackage(Preferences.class);
     }
 
-    public String getMaterial(Material material) {
+    public Printer getPrinter(Printer printer) {
 	try {
-	    result = preferences.get("MATERIAL", objectMapper.writeValueAsString(material));
+	    result = preferences.get("PRINTER", objectMapper.writeValueAsString(printer));
 	} catch (JsonProcessingException e) {
 	    e.printStackTrace();
 	}
 
-	return result;
-    }
-
-    public void setMaterial(Material material) {
 	try {
-	    preferences.get("MATERIAL", objectMapper.writeValueAsString(material));
-	} catch (JsonProcessingException e) {
-	    e.printStackTrace();
-	}
-    }
-
-    public String getMaintenance(Maintenance maintenance) {
-	try {
-	    result = preferences.get("MAINTENANCE", objectMapper.writeValueAsString(maintenance));
-	} catch (JsonProcessingException e) {
+	    return objectMapper.readValue(result, Printer.class);
+	} catch (IOException e) {
 	    e.printStackTrace();
 	}
 
-	return result;
+	return null;
     }
 
-    public void setMaintenance(Maintenance maintenance) {
+    public void setPrinter(Printer printer) {
 	try {
-	    preferences.get("MAINTENANCE", objectMapper.writeValueAsString(maintenance));
-	} catch (JsonProcessingException e) {
-	    e.printStackTrace();
-	}
-    }
-
-    public String getPrinterConsumption(Integer printerConsumption) {
-	try {
-	    result = preferences.get("PRINTERCONSUMPTION", objectMapper.writeValueAsString(printerConsumption));
-	} catch (JsonProcessingException e) {
-	    e.printStackTrace();
-	}
-
-	return result;
-    }
-
-    public void setPrinterConsumption(Integer printerConsumption) {
-	try {
-	    preferences.get("PRINTERCONSUMPTION", objectMapper.writeValueAsString(printerConsumption));
+	    preferences.put("PRINTER", objectMapper.writeValueAsString(printer));
 	} catch (JsonProcessingException e) {
 	    e.printStackTrace();
 	}
