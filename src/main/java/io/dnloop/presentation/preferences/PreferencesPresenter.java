@@ -10,8 +10,8 @@ import io.dnloop.model.Energy;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
 import io.dnloop.model.Parts;
-import io.dnloop.model.Settings;
-import io.dnloop.validator.SettingsValidator;
+import io.dnloop.model.Printer;
+import io.dnloop.validator.PrinterValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -33,6 +33,9 @@ public class PreferencesPresenter {
 
     @FXML
     private CustomTextField txtConsumption;
+
+    @FXML
+    private CustomTextField txtPrinter;
 
     @FXML
     private ChoiceBox<String> cbMaterialType;
@@ -118,7 +121,7 @@ public class PreferencesPresenter {
 
     protected static final String INT = "\\d{0,9}";
 
-    private SettingsValidator settingsValidator = new SettingsValidator();
+    private PrinterValidator settingsValidator = new PrinterValidator();
 
     @FXML
     void initialize() {
@@ -130,6 +133,7 @@ public class PreferencesPresenter {
 	assert txtMaterialPrice != null : "fx:id=\"txtMaterialPrice\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtWorkHour != null : "fx:id=\"txtWorkHour\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtLifeSpan != null : "fx:id=\"txtLifeSpan\" was not injected: check your FXML file 'preferences.fxml'.";
+	assert txtPrinter != null : "fx:id=\"txtPrinter\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtHotbed != null : "fx:id=\"txtHotbed\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtPowerSwitch != null : "fx:id=\"txtPowerSwitch\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtFan != null : "fx:id=\"txtFan\" was not injected: check your FXML file 'preferences.fxml'.";
@@ -141,7 +145,7 @@ public class PreferencesPresenter {
 	assert txtExtruder != null : "fx:id=\"txtExtruder\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtBelt != null : "fx:id=\"txtBelt\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtShield != null : "fx:id=\"txtShield\" was not injected: check your FXML file 'preferences.fxml'.";
-	assert txtResistanceCartridge != null : "fx:id=\"txtResitanceCartridge\" was not injected: check your FXML file 'preferences.fxml'.";
+	assert txtResistanceCartridge != null : "fx:id=\"txtResistanceCartridge\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtEndStop != null : "fx:id=\"txtEndStop\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtBearing != null : "fx:id=\"txtBearing\" was not injected: check your FXML file 'preferences.fxml'.";
 	assert txtPulley != null : "fx:id=\"txtPulley\" was not injected: check your FXML file 'preferences.fxml'.";
@@ -151,7 +155,7 @@ public class PreferencesPresenter {
 
     }
 
-    private Settings readFields() {
+    private Printer readFields() {
 	BigDecimal hotBed = txtHotbed.getText().isEmpty() ? new BigDecimal(0) : new BigDecimal(txtHotbed.getText());
 	BigDecimal powerSwitch = txtPowerSwitch.getText().isEmpty() ? new BigDecimal(0)
 		: new BigDecimal(txtPowerSwitch.getText());
@@ -177,12 +181,15 @@ public class PreferencesPresenter {
 	BigDecimal threadedRod = txtThreadedRod.getText().isEmpty() ? new BigDecimal(0)
 		: new BigDecimal(txtThreadedRod.getText());
 
-	Integer totalConsumption = txtConsumption.getText().isEmpty() ? 0 : Integer.valueOf(txtConsumption.getText());
+	Integer consumption = txtConsumption.getText().isEmpty() ? 0 : Integer.valueOf(txtConsumption.getText());
 
 	Float diameter = txtDiameter.getText().isEmpty() ? 0 : Float.valueOf(txtDiameter.getText());
 
 	BigDecimal filamentPrice = txtMaterialPrice.getText().isEmpty() ? new BigDecimal(0)
 		: new BigDecimal(txtMaterialPrice.getText());
+
+	BigDecimal printerPrice = txtPrinter.getText().isEmpty() ? new BigDecimal(0)
+		: new BigDecimal(txtPrinter.getText());
 
 	Integer lifeSpan = txtLifeSpan.getText().isEmpty() ? 0 : Integer.valueOf(txtLifeSpan.getText());
 	Integer workHours = txtWorkHour.getText().isEmpty() ? 0 : Integer.valueOf(txtWorkHour.getText());
@@ -190,21 +197,23 @@ public class PreferencesPresenter {
 	Parts parts = new Parts(hotBed, powerSwitch, fan, display, proximitySensor, hotEnd, driver, nozzle, extruder,
 		belt, shield, resistanceCartridge, endStop, bearing, pulley, stepEngine, coupler, threadedRod);
 
-	Energy energy = new Energy(totalConsumption);
+	Energy energy = new Energy(consumption);
+
+	energy.setYearlyConsumption(consumption * 365);
 
 	Material material = new Material(diameter, cbMaterialType.getSelectionModel().getSelectedItem(), filamentPrice);
 
 	Maintenance maintenance = new Maintenance(lifeSpan, workHours);
 
-	return new Settings(parts, maintenance, energy, material);
+	return new Printer(printerPrice, parts, maintenance, energy, material);
     }
 
-    private boolean validateFields(Settings settings) {
+    private boolean validateFields(Printer settings) {
 	settingsValidator.setSettings(settings);
 
 	return settingsValidator.validate(txtHotbed, txtPowerSwitch, txtFan, txtDisplay, txtProximitySensor, txtHotEnd,
 		txtDriver, txtNozzle, txtExtruder, txtBelt, txtShield, txtResistanceCartridge, txtEndStop, txtBearing,
 		txtPulley, txtStepEngine, txtCoupler, txtThreadedRod, txtConsumption, txtDiameter, txtMaterialPrice,
-		txtLifeSpan, txtWorkHour);
+		txtLifeSpan, txtWorkHour, txtPrinter);
     }
 }
