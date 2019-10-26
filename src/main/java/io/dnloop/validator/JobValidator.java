@@ -11,29 +11,21 @@ public class JobValidator extends EntityValidator {
 	this.job = job;
     }
 
-    public boolean workHour(CustomTextField textField) {
-	if (!validateProperty(job, "workHour").isEmpty()) {
-	    registerValidation(textField, validateProperty(job, "workHour").iterator().next().getMessage());
+    public boolean validateTextField(CustomTextField textField, String property) {
+	if (!validateProperty(job, property).isEmpty()) {
+	    registerValidation(textField, validateProperty(job, property).iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
     }
 
-    public boolean hourlyRate(CustomTextField textField) {
-	if (!validateProperty(job, "hourlyRate").isEmpty()) {
-	    registerValidation(textField, validateProperty(job, "hourlyRate").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean validate(CustomTextField jobWT, CustomTextField jobCost) {
+    public boolean validate(CustomTextField hourlyRate, CustomTextField workHours) {
 	boolean status = true;
 
-	if (workHour(jobWT))
+	if (validateTextField(hourlyRate, "hourlyRate"))
 	    status = false;
 
-	if (hourlyRate(jobCost))
+	if (validateTextField(workHours, "workHours"))
 	    status = false;
 
 	return status;

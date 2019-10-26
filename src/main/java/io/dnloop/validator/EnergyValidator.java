@@ -15,53 +15,28 @@ public class EnergyValidator extends EntityValidator {
 	this.energy = energy;
     }
 
-    public boolean totalConsumption(CustomTextField textField) {
-	if (!validateProperty(energy, "totalConsumption").isEmpty()) {
-	    registerValidation(textField, validateProperty(energy, "totalConsumption").iterator().next().getMessage());
+    public boolean validateTextField(CustomTextField textField, String property) {
+	if (!validateProperty(energy, property).isEmpty()) {
+	    registerValidation(textField, validateProperty(energy, property).iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
     }
 
-    public boolean totalPrice(CustomTextField textField) {
-	if (!validateProperty(energy, "totalPrice").isEmpty()) {
-	    registerValidation(textField, validateProperty(energy, "totalPrice").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean printerConsumption(CustomTextField textField) {
-	if (!validateProperty(energy, "printerConsumption").isEmpty()) {
-	    registerValidation(textField,
-		    validateProperty(energy, "printerConsumption").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean workHours(CustomTextField textField) {
-	if (!validateProperty(energy, "workHours").isEmpty()) {
-	    registerValidation(textField, validateProperty(energy, "workHours").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean validate(CustomTextField totalConsumption, CustomTextField consumptionPrice,
-	    CustomTextField printerConsumption, CustomTextField workTime) {
+    public boolean validate(CustomTextField totalConsumption, CustomTextField totalPrice,
+	    CustomTextField printerConsumption, CustomTextField workHours) {
 	boolean status = true;
 
-	if (totalConsumption(totalConsumption))
+	if (validateTextField(totalConsumption, "totalConsumption"))
 	    status = false;
 
-	if (totalPrice(consumptionPrice))
+	if (validateTextField(totalPrice, "totalPrice"))
 	    status = false;
 
-	if (printerConsumption(printerConsumption))
+	if (validateTextField(printerConsumption, "printerConsumption"))
 	    status = false;
 
-	if (totalConsumption(workTime))
+	if (validateTextField(workHours, "workHours"))
 	    status = false;
 
 	return status;

@@ -23,9 +23,9 @@ public class PrintingCostValidator extends EntityValidator {
     public PrintingCostValidator() {
     }
 
-    public boolean markup(CustomTextField textField) {
-	if (!validateProperty(printingCost, "markup").isEmpty()) {
-	    registerValidation(textField, validateProperty(printingCost, "markup").iterator().next().getMessage());
+    public boolean validateTextField(CustomTextField textField, String property) {
+	if (!validateProperty(printingCost, property).isEmpty()) {
+	    registerValidation(textField, validateProperty(printingCost, property).iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
@@ -56,7 +56,7 @@ public class PrintingCostValidator extends EntityValidator {
 	if (jobValidator.validate(jobWT, jobCost))
 	    status = false;
 
-	if (markup(markup))
+	if (validateTextField(markup, "markup"))
 	    status = false;
 
 	return status;

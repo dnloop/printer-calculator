@@ -15,41 +15,24 @@ public class MaintenanceValidator extends EntityValidator {
 	this.maintenance = maintenance;
     }
 
-    public boolean totalPartsPrice(CustomTextField textField) {
-	if (!validateProperty(maintenance, "totalPartsPrice").isEmpty()) {
-	    registerValidation(textField,
-		    validateProperty(maintenance, "totalPartsPrice").iterator().next().getMessage());
+    public boolean validateTextField(CustomTextField textField, String property) {
+	if (!validateProperty(maintenance, property).isEmpty()) {
+	    registerValidation(textField, validateProperty(maintenance, property).iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
     }
 
-    public boolean lifeSpan(CustomTextField textField) {
-	if (!validateProperty(maintenance, "lifeSpan").isEmpty()) {
-	    registerValidation(textField, validateProperty(maintenance, "lifeSpan").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean workHours(CustomTextField textField) {
-	if (!validateProperty(maintenance, "workHours").isEmpty()) {
-	    registerValidation(textField, validateProperty(maintenance, "workHours").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean validate(CustomTextField partsCost, CustomTextField expectedLife, CustomTextField maintenanceWork) {
+    public boolean validate(CustomTextField totalPartsPrice, CustomTextField lifeSpan, CustomTextField workHours) {
 	boolean status = true;
 
-	if (totalPartsPrice(partsCost))
+	if (validateTextField(totalPartsPrice, "totalPartsPrice"))
 	    status = false;
 
-	if (lifeSpan(expectedLife))
+	if (validateTextField(lifeSpan, "lifeSpan"))
 	    status = false;
 
-	if (workHours(maintenanceWork))
+	if (validateTextField(workHours, "workHours"))
 	    status = false;
 
 	return status;

@@ -12,25 +12,9 @@ public class MaterialValidator extends EntityValidator {
 	this.material = material;
     }
 
-    public boolean diameter(CustomTextField textField) {
-	if (!validateProperty(material, "diameter").isEmpty()) {
-	    registerValidation(textField, validateProperty(material, "diameter").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean filamentLenght(CustomTextField textField) {
-	if (!validateProperty(material, "filamentLenght").isEmpty()) {
-	    registerValidation(textField, validateProperty(material, "filamentLenght").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean materialPrice(CustomTextField textField) {
-	if (!validateProperty(material, "materialPrice").isEmpty()) {
-	    registerValidation(textField, validateProperty(material, "materialPrice").iterator().next().getMessage());
+    public boolean validateTextField(CustomTextField textField, String property) {
+	if (!validateProperty(material, property).isEmpty()) {
+	    registerValidation(textField, validateProperty(material, property).iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
@@ -39,13 +23,13 @@ public class MaterialValidator extends EntityValidator {
     public boolean validate(CustomTextField diameter, CustomTextField length, CustomTextField filamentPrice) {
 	boolean status = true;
 
-	if (diameter(diameter))
+	if (validateTextField(diameter, "diameter"))
 	    status = false;
 
-	if (filamentLenght(length))
+	if (validateTextField(length, "filamentLength"))
 	    status = false;
 
-	if (materialPrice(filamentPrice))
+	if (validateTextField(filamentPrice, "materialPrice"))
 	    status = false;
 
 	return status;

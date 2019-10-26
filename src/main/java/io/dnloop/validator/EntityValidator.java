@@ -34,8 +34,8 @@ public class EntityValidator {
 	return validator.validateProperty(entity, name);
     } // validate all
 
-    static void registerValidation(CustomTextField textField, String message) {
+    static void registerValidation(CustomTextField textField, String property) {
 	validationSupport.registerValidator(textField,
-		org.controlsfx.validation.Validator.createEmptyValidator(message));
+		org.controlsfx.validation.Validator.createEmptyValidator(property));
     }
 }

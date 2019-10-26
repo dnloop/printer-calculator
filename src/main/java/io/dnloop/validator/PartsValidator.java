@@ -16,152 +16,15 @@ public class PartsValidator extends EntityValidator {
     public PartsValidator() {
     }
 
-    public boolean hotBed(CustomTextField textField) {
-	if (!validateProperty(parts, "hotBed").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "hotBed").iterator().next().getMessage());
+    public boolean validateTextField(CustomTextField textField, String property) {
+	if (!validateProperty(parts, property).isEmpty()) {
+	    registerValidation(textField, validateProperty(parts, property).iterator().next().getMessage());
 	    return true;
 	} else
 	    return false;
     }
 
-    public boolean powerSwitch(CustomTextField textField) {
-	if (!validateProperty(parts, "powerSwitch").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "powerSwitch").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean fan(CustomTextField textField) {
-	if (!validateProperty(parts, "fan").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "fan").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean display(CustomTextField textField) {
-	if (!validateProperty(parts, "display").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "display").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean proximitySensor(CustomTextField textField) {
-	if (!validateProperty(parts, "proximitySensor").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "proximitySensor").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean hotEnd(CustomTextField textField) {
-	if (!validateProperty(parts, "hotEnd").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "hotEnd").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean driver(CustomTextField textField) {
-	if (!validateProperty(parts, "driver").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "driver").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean nozzle(CustomTextField textField) {
-	if (!validateProperty(parts, "nozzle").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "nozzle").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean extruder(CustomTextField textField) {
-	if (!validateProperty(parts, "extruder").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "extruder").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean belt(CustomTextField textField) {
-	if (!validateProperty(parts, "belt").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "belt").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean shield(CustomTextField textField) {
-	if (!validateProperty(parts, "shield").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "shield").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean resistanceCartridge(CustomTextField textField) {
-	if (!validateProperty(parts, "resistanceCartridge").isEmpty()) {
-	    registerValidation(textField,
-		    validateProperty(parts, "resistanceCartridge").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean endStop(CustomTextField textField) {
-	if (!validateProperty(parts, "endStop").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "endStop").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean bearing(CustomTextField textField) {
-	if (!validateProperty(parts, "bearing").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "bearing").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean pulley(CustomTextField textField) {
-	if (!validateProperty(parts, "pulley").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "pulley").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean stepEngine(CustomTextField textField) {
-	if (!validateProperty(parts, "stepEngine").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "stepEngine").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean coupler(CustomTextField textField) {
-	if (!validateProperty(parts, "coupler").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "coupler").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean threadedRod(CustomTextField textField) {
-	if (!validateProperty(parts, "threadedRod").isEmpty()) {
-	    registerValidation(textField, validateProperty(parts, "threadedRod").iterator().next().getMessage());
-	    return true;
-	} else
-	    return false;
-    }
-
-    public boolean validate(CustomTextField txtHotbed, CustomTextField txtPowerSwitch, CustomTextField txtFan,
+    public boolean validate(CustomTextField txtHotBed, CustomTextField txtPowerSwitch, CustomTextField txtFan,
 	    CustomTextField txtDisplay, CustomTextField txtProximitySensor, CustomTextField txtHotEnd,
 	    CustomTextField txtDriver, CustomTextField txtNozzle, CustomTextField txtExtruder, CustomTextField txtBelt,
 	    CustomTextField txtShield, CustomTextField txtResistanceCartridge, CustomTextField txtEndStop,
@@ -170,58 +33,58 @@ public class PartsValidator extends EntityValidator {
 
 	boolean status = true;
 
-	if (hotBed(txtHotEnd))
+	if (validateTextField(txtHotBed, "hotEnd"))
 	    status = false;
 
-	if (powerSwitch(txtPowerSwitch))
+	if (validateTextField(txtPowerSwitch, "powerSwitch"))
 	    status = false;
 
-	if (fan(txtFan))
+	if (validateTextField(txtFan, "fan"))
 	    status = false;
 
-	if (display(txtDisplay))
+	if (validateTextField(txtDisplay, "display"))
 	    status = false;
 
-	if (proximitySensor(txtProximitySensor))
+	if (validateTextField(txtProximitySensor, "proximitySensor"))
 	    status = false;
 
-	if (hotEnd(txtHotEnd))
+	if (validateTextField(txtHotEnd, "hotEnd"))
 	    status = false;
 
-	if (driver(txtDriver))
+	if (validateTextField(txtDriver, "driver"))
 	    status = false;
 
-	if (nozzle(txtNozzle))
+	if (validateTextField(txtNozzle, "nozzle"))
 	    status = false;
 
-	if (extruder(txtExtruder))
+	if (validateTextField(txtExtruder, "extruder"))
 	    status = false;
 
-	if (belt(txtBelt))
+	if (validateTextField(txtBelt, "belt"))
 	    status = false;
 
-	if (shield(txtShield))
+	if (validateTextField(txtShield, "shield"))
 	    status = false;
 
-	if (resistanceCartridge(txtResistanceCartridge))
+	if (validateTextField(txtResistanceCartridge, "resistanceCartridge"))
 	    status = false;
 
-	if (endStop(txtEndStop))
+	if (validateTextField(txtEndStop, "endStop"))
 	    status = false;
 
-	if (bearing(txtBearing))
+	if (validateTextField(txtBearing, "bearing"))
 	    status = false;
 
-	if (pulley(txtPulley))
+	if (validateTextField(txtPulley, "pulley"))
 	    status = false;
 
-	if (stepEngine(txtStepEngine))
+	if (validateTextField(txtStepEngine, "stepEngine"))
 	    status = false;
 
-	if (coupler(txtCoupler))
+	if (validateTextField(txtCoupler, "coupler"))
 	    status = false;
 
-	if (threadedRod(txtThreadedRod))
+	if (validateTextField(txtThreadedRod, "threadedRod"))
 	    status = false;
 
 	return status;
