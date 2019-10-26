@@ -7,7 +7,7 @@ import javax.validation.constraints.Digits;
 public class Job {
 
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
-    private int workHour;
+    private int workHours;
 
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal hourlyRate;
@@ -15,9 +15,9 @@ public class Job {
     public Job() {
     }
 
-    public Job(int workHour, BigDecimal hourlyRate) {
+    public Job(int workHours, BigDecimal hourlyRate) {
 	super();
-	this.workHour = workHour;
+	this.workHours = workHours;
 	this.hourlyRate = hourlyRate;
     }
 
@@ -29,12 +29,12 @@ public class Job {
 	this.hourlyRate = hourlyRate;
     }
 
-    public int getWorkHour() {
-	return workHour;
+    public int getWorkHours() {
+	return workHours;
     }
 
-    public void setWorkHour(int workHour) {
-	this.workHour = workHour;
+    public void setWorkHours(int workHours) {
+	this.workHours = workHours;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Job {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((hourlyRate == null) ? 0 : hourlyRate.hashCode());
-	result = prime * result + workHour;
+	result = prime * result + workHours;
 	return result;
     }
 
@@ -60,14 +60,14 @@ public class Job {
 		return false;
 	} else if (!hourlyRate.equals(other.hourlyRate))
 	    return false;
-	if (workHour != other.workHour)
+	if (workHours != other.workHours)
 	    return false;
 	return true;
     }
 
     @Override
     public String toString() {
-	return "Job [workHour=" + workHour + ", hourlyRate=" + hourlyRate + "]";
+	return "Job [workHours=" + workHours + ", hourlyRate=" + hourlyRate + "]";
     }
 
 }

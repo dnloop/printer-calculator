@@ -12,7 +12,7 @@ public class Material {
     private float diameter;
 
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
-    private int filamentLenght;
+    private int filamentLength;
 
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal materialPrice;
@@ -20,11 +20,11 @@ public class Material {
     public Material() {
     }
 
-    public Material(String type, float diameter, int filamentLenght, BigDecimal materialPrice) {
+    public Material(String type, float diameter, int filamentLength, BigDecimal materialPrice) {
 	super();
 	this.type = type;
 	this.diameter = diameter;
-	this.filamentLenght = filamentLenght;
+	this.filamentLength = filamentLength;
 	this.materialPrice = materialPrice;
     }
 
@@ -50,12 +50,12 @@ public class Material {
 	this.diameter = diameter;
     }
 
-    public int getFilamentLenght() {
-	return filamentLenght;
+    public int getFilamentLength() {
+	return filamentLength;
     }
 
-    public void setFilamentLenght(int filamentLenght) {
-	this.filamentLenght = filamentLenght;
+    public void setFilamentLength(int filamentLength) {
+	this.filamentLength = filamentLength;
     }
 
     public BigDecimal getMaterialPrice() {
@@ -71,7 +71,7 @@ public class Material {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + Float.floatToIntBits(diameter);
-	result = prime * result + filamentLenght;
+	result = prime * result + filamentLength;
 	result = prime * result + ((materialPrice == null) ? 0 : materialPrice.hashCode());
 	result = prime * result + ((type == null) ? 0 : type.hashCode());
 	return result;
@@ -88,7 +88,7 @@ public class Material {
 	Material other = (Material) obj;
 	if (Float.floatToIntBits(diameter) != Float.floatToIntBits(other.diameter))
 	    return false;
-	if (filamentLenght != other.filamentLenght)
+	if (filamentLength != other.filamentLength)
 	    return false;
 	if (materialPrice == null) {
 	    if (other.materialPrice != null)
@@ -105,7 +105,7 @@ public class Material {
 
     @Override
     public String toString() {
-	return "Material [type=" + type + ", diameter=" + diameter + ", filamentLenght=" + filamentLenght
+	return "Material [type=" + type + ", diameter=" + diameter + ", filamentLength=" + filamentLength
 		+ ", materialPrice=" + materialPrice + "]";
     }
 
