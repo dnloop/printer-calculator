@@ -132,7 +132,7 @@
                           </rowConstraints>
                            <children>
                               <Label text="Precio total de &#10;las partes" />
-                              <Label text="Horas de trabajo&#10;(Anual)" GridPane.rowIndex="2" />
+                              <Label text="Horas de trabajo&#10;(día)" GridPane.rowIndex="2" />
                               <Label text="Subtotal" GridPane.rowIndex="3" />
                               <CustomTextField fx:id="partsCost" GridPane.columnIndex="1" />
                               <CustomTextField fx:id="expectedLife" GridPane.columnIndex="1" GridPane.rowIndex="1" />
