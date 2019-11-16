@@ -16,6 +16,7 @@ import io.dnloop.model.Energy;
 import io.dnloop.model.Job;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
+import io.dnloop.model.MaterialProperty;
 import io.dnloop.model.Printer;
 
 @RunWith(SpringRunner.class)
@@ -50,8 +51,13 @@ public class CalculatorTest {
 
     @Test
     public void totalMaterial() {
-	material = new Material(1.75F, "PLA", new BigDecimal(1179));
-	material.setFilamentLength(7040);
+	MaterialProperty materialProperty = new MaterialProperty();
+	materialProperty.setDensity(1.24F);
+
+	material = new Material(1.75F, materialProperty, new BigDecimal(1179));
+	material.setFilamentLength(6980);
+	material.setFilamentWeigth(1000);
+
 	System.out.println("totalMaterial: " + Calculator.materialTotal(material));
 	assertTrue(Calculator.materialTotal(material).compareTo(new BigDecimal(0)) > 0);
     }
