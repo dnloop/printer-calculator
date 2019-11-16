@@ -9,6 +9,7 @@ import org.controlsfx.control.textfield.CustomTextField;
 import io.dnloop.model.Energy;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
+import io.dnloop.model.MaterialProperty;
 import io.dnloop.model.Parts;
 import io.dnloop.model.Printer;
 import io.dnloop.validator.PrinterValidator;
@@ -38,7 +39,7 @@ public class PreferencesPresenter {
     private CustomTextField txtPrinter;
 
     @FXML
-    private ChoiceBox<String> cbMaterialType;
+    private ChoiceBox<MaterialProperty> cbMaterialType;
 
     @FXML
     private CustomTextField txtDiameter;

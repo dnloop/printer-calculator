@@ -6,7 +6,7 @@ import javax.validation.constraints.Digits;
 
 public class Material {
 
-    private String type;
+    private MaterialProperty type;
 
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private float diameter;
@@ -17,10 +17,12 @@ public class Material {
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal materialPrice;
 
+    private int filamentWeigth;
+
     public Material() {
     }
 
-    public Material(String type, float diameter, int filamentLength, BigDecimal materialPrice) {
+    public Material(MaterialProperty type, float diameter, int filamentLength, BigDecimal materialPrice) {
 	super();
 	this.type = type;
 	this.diameter = diameter;
@@ -28,17 +30,17 @@ public class Material {
 	this.materialPrice = materialPrice;
     }
 
-    public Material(Float diameter, String type, BigDecimal materialPrice) {
+    public Material(Float diameter, MaterialProperty type, BigDecimal materialPrice) {
 	this.type = type;
 	this.diameter = diameter;
 	this.materialPrice = materialPrice;
     }
 
-    public String getType() {
+    public MaterialProperty getType() {
 	return type;
     }
 
-    public void setType(String type) {
+    public void setType(MaterialProperty type) {
 	this.type = type;
     }
 
@@ -56,6 +58,14 @@ public class Material {
 
     public void setFilamentLength(int filamentLength) {
 	this.filamentLength = filamentLength;
+    }
+
+    public int getFilamentWeigth() {
+	return filamentWeigth;
+    }
+
+    public void setFilamentWeigth(int filamentWeigth) {
+	this.filamentWeigth = filamentWeigth;
     }
 
     public BigDecimal getMaterialPrice() {

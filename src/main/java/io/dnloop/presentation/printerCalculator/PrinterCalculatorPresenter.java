@@ -11,6 +11,7 @@ import io.dnloop.model.Energy;
 import io.dnloop.model.Job;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
+import io.dnloop.model.MaterialProperty;
 import io.dnloop.model.PrintingCost;
 import io.dnloop.presentation.preferences.PreferencesPresenter;
 import io.dnloop.presentation.preferences.PreferencesView;
@@ -95,7 +96,7 @@ public class PrinterCalculatorPresenter {
     private CustomTextField maintenanceSubtotal;
 
     @FXML
-    private ChoiceBox<String> filamentType;
+    private ChoiceBox<MaterialProperty> filamentType;
 
     @FXML
     private CustomTextField diameter;
