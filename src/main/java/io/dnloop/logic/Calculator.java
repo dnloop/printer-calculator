@@ -10,22 +10,33 @@ import io.dnloop.model.Printer;
 
 public class Calculator {
 
-    private static MathContext mc = new MathContext(2);
+    private static MathContext mc = new MathContext(4);
 
     public static BigDecimal energyTotal(Energy energy) {
 	int totalConsumption = energy.getTotalConsumption();
 	int printerConsumption = energy.getPrinterConsumption();
-	BigDecimal consumptionPrice = energy.getTotalPrice();
+	BigDecimal totalPrice = energy.getTotalPrice();
 	int workTime = energy.getWorkHours();
+	/*
+	 * totalConsumption (Kw) * printerConsumption (W) * 1000
+	 */
 	BigDecimal totalWatt = new BigDecimal(Converter.toWatt(totalConsumption) * printerConsumption);
 	BigDecimal totalWork = new BigDecimal(workTime * printerConsumption);
+	/*
+	 * (totalWork (machine consumption) * totalPrice (Electric Bill)) / totalWatt
+	 */
 
-	return totalWatt.divide(consumptionPrice.multiply(totalWork, mc), mc);
+	try {
+	    return totalPrice.multiply(totalWork, mc).divide(totalWatt, mc);
+	} catch (ArithmeticException e) {
+	    return new BigDecimal(0);
+	}
     }
 
     public static BigDecimal jobTotal(Job job) {
 	BigDecimal hourlyRate = job.getHourlyRate();
 	BigDecimal workHour = new BigDecimal(job.getWorkHours());
+
 	return hourlyRate.multiply(workHour, mc);
     }
 
@@ -46,25 +57,27 @@ public class Calculator {
 	return total;
     }
 
+    /**
+     * Currently it only manages filament values in millimeters and weight in grams
+     */
     public static BigDecimal materialTotal(Material material) {
 
 	BigDecimal diameter = new BigDecimal(material.getDiameter()); // mm
 
-	BigDecimal radius = diameter.divide(new BigDecimal(2));
+	BigDecimal radius = diameter.divide(new BigDecimal(2), mc).pow(2);
 
 	BigDecimal pi = new BigDecimal(Math.PI);
 
 	BigDecimal length = new BigDecimal(material.getFilamentLength()); // mm
 
-	BigDecimal volume = radius.pow(2).multiply(length).multiply(pi);
+	BigDecimal density = new BigDecimal(material.getType().getDensity());
 
-	BigDecimal weight = new BigDecimal(1000); // kg
+	BigDecimal weight = new BigDecimal(material.getFilamentWeigth());
 
-	BigDecimal density = weight.divide(volume);
+	BigDecimal price = material.getMaterialPrice();
 
-	BigDecimal materialCost = density.multiply(pi).multiply(
-		diameter.divide(new BigDecimal(2)).pow(2).multiply(length).multiply(material.getMaterialPrice()));
+	BigDecimal materialCost = density.multiply(pi).multiply(radius).multiply(length).multiply(price);
 
-	return materialCost;
+	return materialCost.divide(weight, mc).divide(weight, mc);
     }
 }
