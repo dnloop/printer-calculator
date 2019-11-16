@@ -11,12 +11,18 @@ public class Energy {
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private Integer totalConsumption;
 
+    @Min(value = 1)
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal totalPrice;
 
+    @Min(value = 1)
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private Integer printerConsumption;
 
+    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
+    private Integer yearlyConsumption;
+
+    @Min(value = 1)
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private Integer workHours;
 
@@ -59,6 +65,14 @@ public class Energy {
 	this.printerConsumption = printerConsumption;
     }
 
+    public Integer getYearlyConsumption() {
+	return yearlyConsumption;
+    }
+
+    public void setYearlyConsumption(Integer yearlyConsumption) {
+	this.yearlyConsumption = yearlyConsumption;
+    }
+
     public Integer getWorkHours() {
 	return workHours;
     }
@@ -75,6 +89,7 @@ public class Energy {
 	result = prime * result + ((totalConsumption == null) ? 0 : totalConsumption.hashCode());
 	result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
 	result = prime * result + ((workHours == null) ? 0 : workHours.hashCode());
+	result = prime * result + ((yearlyConsumption == null) ? 0 : yearlyConsumption.hashCode());
 	return result;
     }
 
@@ -107,13 +122,18 @@ public class Energy {
 		return false;
 	} else if (!workHours.equals(other.workHours))
 	    return false;
+	if (yearlyConsumption == null) {
+	    if (other.yearlyConsumption != null)
+		return false;
+	} else if (!yearlyConsumption.equals(other.yearlyConsumption))
+	    return false;
 	return true;
     }
 
     @Override
     public String toString() {
 	return "Energy [totalConsumption=" + totalConsumption + ", totalPrice=" + totalPrice + ", printerConsumption="
-		+ printerConsumption + ", workHours=" + workHours + "]";
+		+ printerConsumption + ", yearlyConsumption=" + yearlyConsumption + ", workHours=" + workHours + "]";
     }
 
 }
