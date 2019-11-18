@@ -8,8 +8,6 @@ public class PrinterValidator extends EntityValidator {
 
     private Printer printer;
 
-    private EnergyValidator energyValidator;
-
     private MaterialValidator materialValidator;
 
     private MaintenanceValidator maintenanceValidator;
@@ -35,13 +33,9 @@ public class PrinterValidator extends EntityValidator {
 
 	boolean status = true;
 
-	energyValidator = new EnergyValidator(printer.getEnergy());
 	maintenanceValidator = new MaintenanceValidator(printer.getMaintenance());
 	materialValidator = new MaterialValidator(printer.getMaterial());
 	partsValidator = new PartsValidator(printer.getParts());
-
-	if (energyValidator.validateTextField(txtConsumption, "printerConsumption"))
-	    status = false;
 
 	if (validateTextField(txtPrinter, "printer"))
 	    status = false;

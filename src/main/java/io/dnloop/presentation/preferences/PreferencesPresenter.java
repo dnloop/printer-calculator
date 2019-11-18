@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
-import io.dnloop.model.Energy;
 import io.dnloop.model.Maintenance;
 import io.dnloop.model.Material;
 import io.dnloop.model.MaterialProperty;
@@ -198,15 +197,11 @@ public class PreferencesPresenter {
 	Parts parts = new Parts(hotBed, powerSwitch, fan, display, proximitySensor, hotEnd, driver, nozzle, extruder,
 		belt, shield, resistanceCartridge, endStop, bearing, pulley, stepEngine, coupler, threadedRod);
 
-	Energy energy = new Energy(consumption);
-
-	energy.setYearlyConsumption(consumption * 365);
-
 	Material material = new Material(diameter, cbMaterialType.getSelectionModel().getSelectedItem(), filamentPrice);
 
 	Maintenance maintenance = new Maintenance(lifeSpan, workHours);
 
-	return new Printer(printerPrice, parts, maintenance, energy, material);
+	return new Printer(printerPrice, parts, maintenance, material, consumption);
     }
 
     private boolean validateFields(Printer settings) {

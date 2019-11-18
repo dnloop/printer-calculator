@@ -17,13 +17,6 @@ public class Energy {
 
     @Min(value = 1)
     @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
-    private Integer printerConsumption;
-
-    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
-    private Integer yearlyConsumption;
-
-    @Min(value = 1)
-    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private Integer workHours;
 
     public Energy() {
@@ -33,12 +26,7 @@ public class Energy {
 	super();
 	this.totalConsumption = totalConsumption;
 	this.totalPrice = totalPrice;
-	this.printerConsumption = printerConsumption;
 	this.workHours = workHours;
-    }
-
-    public Energy(Integer totalConsumption) {
-	this.totalConsumption = totalConsumption;
     }
 
     public Integer getTotalConsumption() {
@@ -57,22 +45,6 @@ public class Energy {
 	this.totalPrice = totalPrice;
     }
 
-    public Integer getPrinterConsumption() {
-	return printerConsumption;
-    }
-
-    public void setPrinterConsumption(Integer printerConsumption) {
-	this.printerConsumption = printerConsumption;
-    }
-
-    public Integer getYearlyConsumption() {
-	return yearlyConsumption;
-    }
-
-    public void setYearlyConsumption(Integer yearlyConsumption) {
-	this.yearlyConsumption = yearlyConsumption;
-    }
-
     public Integer getWorkHours() {
 	return workHours;
     }
@@ -85,11 +57,9 @@ public class Energy {
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((printerConsumption == null) ? 0 : printerConsumption.hashCode());
 	result = prime * result + ((totalConsumption == null) ? 0 : totalConsumption.hashCode());
 	result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
 	result = prime * result + ((workHours == null) ? 0 : workHours.hashCode());
-	result = prime * result + ((yearlyConsumption == null) ? 0 : yearlyConsumption.hashCode());
 	return result;
     }
 
@@ -102,11 +72,6 @@ public class Energy {
 	if (getClass() != obj.getClass())
 	    return false;
 	Energy other = (Energy) obj;
-	if (printerConsumption == null) {
-	    if (other.printerConsumption != null)
-		return false;
-	} else if (!printerConsumption.equals(other.printerConsumption))
-	    return false;
 	if (totalConsumption == null) {
 	    if (other.totalConsumption != null)
 		return false;
@@ -122,18 +87,14 @@ public class Energy {
 		return false;
 	} else if (!workHours.equals(other.workHours))
 	    return false;
-	if (yearlyConsumption == null) {
-	    if (other.yearlyConsumption != null)
-		return false;
-	} else if (!yearlyConsumption.equals(other.yearlyConsumption))
-	    return false;
+
 	return true;
     }
 
     @Override
     public String toString() {
-	return "Energy [totalConsumption=" + totalConsumption + ", totalPrice=" + totalPrice + ", printerConsumption="
-		+ printerConsumption + ", yearlyConsumption=" + yearlyConsumption + ", workHours=" + workHours + "]";
+	return "Energy [totalConsumption=" + totalConsumption + ", totalPrice=" + totalPrice + ", workHours="
+		+ workHours + "]";
     }
 
 }

@@ -3,17 +3,20 @@ package io.dnloop.model;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 
 public class Printer {
 
     @Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9")
     private BigDecimal printerPrice;
 
+    @Min(value = 1)
+    @Digits(fraction = 0, integer = 9, message = "Exceso de Dígitos: mayor a 9")
+    private Integer printerConsumption;
+
     private Parts parts;
 
     private Maintenance maintenance;
-
-    private Energy energy;
 
     private Material material;
 
@@ -21,13 +24,13 @@ public class Printer {
     }
 
     public Printer(@Digits(fraction = 2, integer = 9, message = "Exceso de Dígitos: mayor a 9") BigDecimal printerPrice,
-	    Parts parts, Maintenance maintenance, Energy energy, Material material) {
+	    Parts parts, Maintenance maintenance, Material material, Integer printerConsumption) {
 	super();
 	this.printerPrice = printerPrice;
 	this.parts = parts;
 	this.maintenance = maintenance;
-	this.energy = energy;
 	this.material = material;
+	this.printerConsumption = printerConsumption;
     }
 
     public BigDecimal getPrinterPrice() {
@@ -54,14 +57,6 @@ public class Printer {
 	this.maintenance = maintenance;
     }
 
-    public Energy getEnergy() {
-	return energy;
-    }
-
-    public void setEnergy(Energy energy) {
-	this.energy = energy;
-    }
-
     public Material getMaterial() {
 	return material;
     }
@@ -70,14 +65,22 @@ public class Printer {
 	this.material = material;
     }
 
+    public Integer getPrinterConsumption() {
+	return printerConsumption;
+    }
+
+    public void setPrinterConsumption(Integer printerConsumption) {
+	this.printerConsumption = printerConsumption;
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((energy == null) ? 0 : energy.hashCode());
 	result = prime * result + ((maintenance == null) ? 0 : maintenance.hashCode());
 	result = prime * result + ((material == null) ? 0 : material.hashCode());
 	result = prime * result + ((parts == null) ? 0 : parts.hashCode());
+	result = prime * result + ((printerConsumption == null) ? 0 : printerConsumption.hashCode());
 	result = prime * result + ((printerPrice == null) ? 0 : printerPrice.hashCode());
 	return result;
     }
@@ -91,11 +94,6 @@ public class Printer {
 	if (getClass() != obj.getClass())
 	    return false;
 	Printer other = (Printer) obj;
-	if (energy == null) {
-	    if (other.energy != null)
-		return false;
-	} else if (!energy.equals(other.energy))
-	    return false;
 	if (maintenance == null) {
 	    if (other.maintenance != null)
 		return false;
@@ -111,6 +109,11 @@ public class Printer {
 		return false;
 	} else if (!parts.equals(other.parts))
 	    return false;
+	if (printerConsumption == null) {
+	    if (other.printerConsumption != null)
+		return false;
+	} else if (!printerConsumption.equals(other.printerConsumption))
+	    return false;
 	if (printerPrice == null) {
 	    if (other.printerPrice != null)
 		return false;
@@ -121,8 +124,8 @@ public class Printer {
 
     @Override
     public String toString() {
-	return "Printer [printerPrice=" + printerPrice + ", parts=" + parts + ", maintenance=" + maintenance
-		+ ", energy=" + energy + ", material=" + material + "]";
+	return "Printer [printerPrice=" + printerPrice + ", printerConsumption=" + printerConsumption + ", parts="
+		+ parts + ", maintenance=" + maintenance + ", material=" + material + "]";
     }
 
 }
