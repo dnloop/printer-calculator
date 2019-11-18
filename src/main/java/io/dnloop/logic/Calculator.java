@@ -12,9 +12,19 @@ public class Calculator {
 
     private static MathContext mc = new MathContext(4);
 
-    public static BigDecimal energyTotal(Energy energy) {
+    /**
+     * <p>
+     * The total cost of energy per single printed model.
+     * <p>
+     * 
+     * @param energy
+     * @param printer
+     * @return BigDecimal
+     */
+    public static BigDecimal energyTotal(Energy energy, Printer printer) {
 	int totalConsumption = energy.getTotalConsumption();
-	int printerConsumption = energy.getPrinterConsumption();
+	int printerConsumption = printer.getPrinterConsumption();
+	// Note: The total price covers the electricity for every appliance.
 	BigDecimal totalPrice = energy.getTotalPrice();
 	int workTime = energy.getWorkHours();
 	/*
@@ -33,6 +43,12 @@ public class Calculator {
 	}
     }
 
+    /**
+     * The labor cost in post processing the model.
+     * 
+     * @param job
+     * @return
+     */
     public static BigDecimal jobTotal(Job job) {
 	BigDecimal hourlyRate = job.getHourlyRate();
 	BigDecimal workHour = new BigDecimal(job.getWorkHours());
@@ -40,25 +56,51 @@ public class Calculator {
 	return hourlyRate.multiply(workHour, mc);
     }
 
-    public static BigDecimal maintenanceTotal(Printer printer) {
-	BigDecimal lifeSpan = new BigDecimal(printer.getMaintenance().getLifeSpan());
+    /**
+     * The machine maintenance expense cost.
+     * 
+     * @param energy
+     * @param printer
+     * @return
+     */
+    public static BigDecimal maintenanceTotal(Energy energy, Printer printer) {
+	BigDecimal total = new BigDecimal(0);
 
-	BigDecimal workHours = lifeSpan.multiply(new BigDecimal(printer.getMaintenance().getWorkHours())); // daily ->
-													   // yearly
+	BigDecimal depreciationExpense;
 
-	BigDecimal depreciationExpense = printer.getPrinterPrice().divide(lifeSpan.multiply(workHours));
+	int lifeSpan = printer.getMaintenance().getLifeSpan();
 
-	BigDecimal powerConsumption = new BigDecimal(printer.getEnergy().getYearlyConsumption() * 24); // Watt
+	int workHours = lifeSpan * printer.getMaintenance().getWorkHours();
 
-	BigDecimal maintenance = printer.getParts().totalParts().divide(workHours); // maintenance cost
+	energy.setWorkHours(workHours * 360);
 
-	BigDecimal total = maintenance.add(depreciationExpense).add(powerConsumption); // machine overhead per hour
+	BigDecimal powerConsumption = energyTotal(energy, printer);
+
+	try {
+	    depreciationExpense = printer.getPrinterPrice().divide(new BigDecimal(lifeSpan * workHours), mc);
+	} catch (ArithmeticException e) {
+	    depreciationExpense = new BigDecimal(0);
+	}
+
+	// Maintenance calculation could be optional but in case its used..
+	total.add(depreciationExpense).add(powerConsumption);
+
+	try {
+	    BigDecimal maintenance = printer.getParts().totalParts().divide(new BigDecimal(workHours), mc); // maintenance
+													    // cost
+	    total.add(maintenance); // machine overhead per hour
+	} catch (ArithmeticException e) {
+	}
 
 	return total;
     }
 
     /**
-     * Currently it only manages filament values in millimeters and weight in grams
+     * The total material cost. Currently it only manages filament values in
+     * millimeters and weight in grams.
+     * 
+     * @param material
+     * @return
      */
     public static BigDecimal materialTotal(Material material) {
 
